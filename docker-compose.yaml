@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: 'backend-python-flask'
-    command: 'python3 server.py' # ecommerce-account-service-jvbs
-    # command: 'gunicorn -w 5 -b 0.0.0.0:5000 "server:create_app()"'
+    # command: 'python3 server.py' # ecommerce-account-service-jvbs
+    command: 'gunicorn -w 5 -b 0.0.0.0:5000 "server:create_app()"'
     ports:
       - 5000:5000
     volumes: 
