@@ -25,7 +25,7 @@ source .venv/bin/activate
 # 4° Passo
 
 ```
-pip install > requirements.txt
+pip install -r requirements.txt
 ```
 
 # 5° Passo
