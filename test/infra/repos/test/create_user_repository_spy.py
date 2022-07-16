@@ -19,6 +19,6 @@ class CreateUserRepositorySpy:
         self.user_data = user_data
 
         return {
-            "name": user_data if "name" in user_data.keys() else None,
+            "name": user_data["name"] if "name" in user_data.keys() else None,
             "email": user_data["email"],
         }

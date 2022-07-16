@@ -1,1 +1,1 @@
-from .create_user import CreateUserModel
+from .create_user import CreateUserModel, CreateUserInterface
