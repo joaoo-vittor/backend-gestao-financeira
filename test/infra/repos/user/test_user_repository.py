@@ -40,3 +40,12 @@ def test_should_return_user_model_without_name_if_user_without_name_was_inserted
     assert response["email"] == fake_user["email"]
     assert response["name"] is None
     assert response["password_hash"] == fake_user["password"]
+
+
+def test_should_return_none_if_pass_none():
+    sut = make_sut()
+    fake_user = None
+
+    response = sut.create_user(fake_user)
+
+    assert response is None
