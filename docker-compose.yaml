@@ -11,3 +11,36 @@ services:
       - 5000:5000
     volumes: 
       - .:/app
+    networks:
+      - network
+  
+  bd:
+    image: postgres:14.1
+    container_name: postgres-db
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - TZ=America/Sao_Paulo
+    ports:
+      - 5433:5432
+    volumes:
+      - .database:/var/lib/postgresql/data
+    networks:
+      - network
+  
+  pgadmindb:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=frodo
+      - PGADMIN_DEFAULT_PASSWORD=mellon
+    ports:
+      - 16543:80
+    depends_on:
+      - bd
+    networks:
+      - network
+
+
+
+networks:
+  network:
+    driver: bridge
