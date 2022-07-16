@@ -1,0 +1,54 @@
+from typing import Union
+from src.data.interfaces import CreateUserRespositoryInterface
+from src.domain.models import UserModel as User
+from src.infra.entities import User as UserModel
+from src.domain.usecases import CreateUserModel
+from src.infra.config import DBConnectionHandler
+
+
+class CreateUserRepository(CreateUserRespositoryInterface):
+    def __init__(self, connection_handler: DBConnectionHandler) -> None:
+        self.__connection_handler = connection_handler
+
+    def create_user(self, user_data: CreateUserModel) -> Union[User, None]:
+        """Create user
+
+        Args:
+            user_data (CreateUserModel): model with data to create user
+
+        Returns:
+            UserModel: model with data of the user created
+        """
+
+        if user_data is None:
+            return None
+
+        if "name" in user_data.keys():
+            user = UserModel(
+                name=user_data["name"],
+                email=user_data["email"],
+                password_hash=user_data["password"],
+            )
+        else:
+            user = UserModel(
+                email=user_data["email"],
+                password_hash=user_data["password"],
+            )
+
+        try:
+            session = self.__connection_handler.get_session()
+            session.add(user)
+            session.commit()
+
+            return User(
+                name=user_data["name"] if "name" in user_data.keys() else None,
+                email=user_data["email"],
+                password_hash=user_data["password"],
+            )
+
+        except Exception:
+            session.rollback()
+            raise
+
+        finally:
+            session.close()
