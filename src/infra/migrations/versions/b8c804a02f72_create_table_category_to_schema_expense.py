@@ -24,15 +24,15 @@ def upgrade() -> None:
         sa.Column(
             "user_id",
             sa.Integer,
-            sa.ForeignKey("user.user.id", name="user"),
+            sa.ForeignKey("users.users.id", name="users"),
             nullable=False,
         ),
         sa.Column("name", sa.String(128), nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
         sa.Column("updated_at", sa.DateTime(timezone=True), onupdate=func.now()),
-        schema="expense",
+        schema="expenses",
     )
 
 
 def downgrade() -> None:
-    op.drop_table("category", schema="expense")
+    op.drop_table("category", schema="expenses")

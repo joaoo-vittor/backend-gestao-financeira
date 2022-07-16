@@ -24,9 +24,9 @@ def upgrade() -> None:
         sa.Column("name", sa.String(128), nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
         sa.Column("updated_at", sa.DateTime(timezone=True), onupdate=func.now()),
-        schema="expense",
+        schema="expenses",
     )
 
 
 def downgrade() -> None:
-    op.drop_table("payment_method", schema="expense")
+    op.drop_table("payment_method", schema="expenses")

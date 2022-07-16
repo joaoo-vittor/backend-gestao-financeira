@@ -16,10 +16,10 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.execute("CREATE SCHEMA IF NOT EXISTS user;")
-    op.execute("CREATE SCHEMA IF NOT EXISTS expense;")
+    op.execute("CREATE SCHEMA IF NOT EXISTS users;")
+    op.execute("CREATE SCHEMA IF NOT EXISTS expenses;")
 
 
 def downgrade() -> None:
-    op.execute("DROP SCHEMA IF NOT EXISTS user;")
-    op.execute("DROP SCHEMA IF NOT EXISTS expense;")
+    op.execute("DROP SCHEMA IF NOT EXISTS users;")
+    op.execute("DROP SCHEMA IF NOT EXISTS expenses;")

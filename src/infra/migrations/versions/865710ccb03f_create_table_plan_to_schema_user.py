@@ -26,9 +26,9 @@ def upgrade() -> None:
         sa.Column("active", sa.Boolean, default=False),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
         sa.Column("updated_at", sa.DateTime(timezone=True), onupdate=func.now()),
-        schema="user",
+        schema="users",
     )
 
 
 def downgrade() -> None:
-    op.drop_table("plan", schema="user")
+    op.drop_table("plan", schema="users")

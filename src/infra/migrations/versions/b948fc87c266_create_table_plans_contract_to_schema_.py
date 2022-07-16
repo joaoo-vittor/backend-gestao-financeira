@@ -24,28 +24,26 @@ def upgrade() -> None:
             "user_id",
             sa.Integer,
             sa.ForeignKey(
-                "user.user.id",
-                name="user",
+                "users.users.id",
+                name="users",
             ),
             nullable=False,
         ),
         sa.Column(
             "plan_id",
             sa.Integer,
-            sa.ForeignKey("user.plan.id", name="user"),
+            sa.ForeignKey("users.plan.id", name="users"),
             nullable=False,
         ),
         sa.Column("value_plan", sa.Float, nullable=False),
-        sa.column(
-            "start_time_stamp", sa.DateTime(timezone=True), server_default=func.now()
-        ),
+        sa.column("start_time_stamp", sa.DateTime(timezone=True)),
         sa.Column("end_time_stamp", sa.DateTime(timezone=True)),
         sa.Column("active", sa.Boolean, default=True),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
         sa.Column("updated_at", sa.DateTime(timezone=True), onupdate=func.now()),
-        schema="user",
+        schema="users",
     )
 
 
 def downgrade() -> None:
-    op.drop_table("plans_contract", schema="user")
+    op.drop_table("plans_contract", schema="users")

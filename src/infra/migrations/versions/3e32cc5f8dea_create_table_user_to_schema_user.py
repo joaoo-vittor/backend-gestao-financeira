@@ -19,16 +19,16 @@ depends_on = None
 
 def upgrade() -> None:
     op.create_table(
-        "user",
+        "users",
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("name", sa.String(128), nullable=True),
         sa.Column("email", sa.String(255), nullable=False, unique=True),
         sa.Column("password_hash", sa.String, nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
         sa.Column("updated_at", sa.DateTime(timezone=True), onupdate=func.now()),
-        schema="user",
+        schema="users",
     )
 
 
 def downgrade() -> None:
-    op.drop_table("user", schema="user")
+    op.drop_table("users", schema="users")
