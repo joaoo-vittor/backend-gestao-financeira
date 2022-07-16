@@ -6,13 +6,13 @@ from src.infra.config import Base
 class Expense(Base):
     """Expense Entity"""
 
-    __tablename__ = "expense"
+    __tablename__ = "expenses"
 
     id = Column(Integer, primary_key=True)
     user_id = Column(
         Integer,
         ForeignKey(
-            "user.user.id",
+            "users.id",
             name="user",
         ),
         nullable=False,
@@ -20,7 +20,7 @@ class Expense(Base):
     category_id = Column(
         Integer,
         ForeignKey(
-            "expense.category.id",
+            "category.id",
             name="category",
         ),
         nullable=False,
@@ -28,7 +28,7 @@ class Expense(Base):
     payment_method_id = Column(
         Integer,
         ForeignKey(
-            "expense.payment_method.id",
+            "payment_method.id",
             name="payment_method",
         ),
         nullable=False,

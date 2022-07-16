@@ -12,16 +12,16 @@ class PlansContract(Base):
     user_id = Column(
         Integer,
         ForeignKey(
-            "user.user.id",
-            name="user",
+            "users.id",
+            name="users",
         ),
         nullable=False,
     )
     plan_id = Column(
         Integer,
         ForeignKey(
-            "user.plan.id",
-            name="user",
+            "plan.id",
+            name="users",
         ),
         nullable=False,
     )

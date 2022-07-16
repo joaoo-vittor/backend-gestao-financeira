@@ -12,8 +12,8 @@ class Category(Base):
     user_id = Column(
         Integer,
         ForeignKey(
-            "user.user.id",
-            name="user",
+            "users.id",
+            name="users",
         ),
         nullable=False,
     )

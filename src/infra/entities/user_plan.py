@@ -9,10 +9,10 @@ class Plan(Base):
     __tablename__ = "plan"
 
     id = Column(Integer, primary_key=True)
-    _type = Column(String(50), nullable=False)
+    type = Column(String(50), nullable=False)
     active = Column(Boolean, default=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     def __repr__(self) -> str:
-        return f"Plan(type={self._type}, active={self.active})"
+        return f"Plan(type={self.type}, active={self.active})"
