@@ -29,3 +29,14 @@ def test_should_return_user_model_if_user_was_inserted():
     assert response["email"] == fake_user["email"]
     assert response["name"] == fake_user["name"]
     assert response["password_hash"] == fake_user["password"]
+
+
+def test_should_return_user_model_without_name_if_user_without_name_was_inserted():
+    sut = make_sut()
+    fake_user = CreateUserModel(email=faker.email(), password=faker.password())
+
+    response = sut.create_user(fake_user)
+
+    assert response["email"] == fake_user["email"]
+    assert response["name"] is None
+    assert response["password_hash"] == fake_user["password"]
