@@ -24,12 +24,12 @@ class CreateUserUseCase(CreateUserInterface):
             UserModel: model with data of user created
         """
 
+        if user is None:
+            return None
+
         password_hashed = self.__encrypter.encrypt(user["password"])
         user["password"] = password_hashed
 
         response = self.__create_user_repository.create_user(user)
 
-        if response:
-            return response
-
-        return None
+        return response

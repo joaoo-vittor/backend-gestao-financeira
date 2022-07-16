@@ -45,3 +45,11 @@ def test_should_call_add_with_correct_values():
     assert response["email"] == repository.user_data["email"]
     assert response["name"] == repository.user_data["name"]
     assert repository.user_data["password"] == "hashed_password"
+
+
+def test_should_return_none_if_call_add_invalid_param():
+    sut = make_sut().sut
+
+    response = sut.add(None)
+
+    assert response is None
