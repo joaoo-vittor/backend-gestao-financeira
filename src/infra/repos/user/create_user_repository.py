@@ -43,7 +43,6 @@ class CreateUserRepository(CreateUserRespositoryInterface):
             return User(
                 name=user_data["name"] if "name" in user_data.keys() else None,
                 email=user_data["email"],
-                password_hash=user_data["password"],
             )
 
         except Exception:
