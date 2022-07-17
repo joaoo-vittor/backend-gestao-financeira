@@ -13,7 +13,7 @@ class PlansContract(Base):
     user_id = Column(
         Integer,
         ForeignKey(
-            "users.id",
+            "users.users.id",
             name="users",
         ),
         nullable=False,
@@ -21,7 +21,7 @@ class PlansContract(Base):
     plan_id = Column(
         Integer,
         ForeignKey(
-            "plan.id",
+            "users.plan.id",
             name="users",
         ),
         nullable=False,
@@ -34,7 +34,9 @@ class PlansContract(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     def __repr__(self) -> str:
-        return f"PlansContract(value_plan={self.value_plan},\
+        return f"PlansContract(\
+            user_id={self.user_id}\
+            value_plan={self.value_plan},\
             start_time_stamp={self.start_time_stamp},\
             end_time_stamp={self.end_time_stamp},\
             active={self.active})"
