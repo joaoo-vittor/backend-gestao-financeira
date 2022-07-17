@@ -1,7 +1,8 @@
+import datetime
 from typing import Union
 from src.data.interfaces import CreateUserRespositoryInterface
 from src.domain.models import UserModel as User
-from src.infra.entities import User as UserModel
+from src.infra.entities import User as UserModel, PlansContract
 from src.domain.usecases import CreateUserModel
 from src.infra.config import DBConnectionHandler
 
@@ -38,6 +39,22 @@ class CreateUserRepository(CreateUserRespositoryInterface):
         try:
             session = self.__connection_handler.get_session()
             session.add(user)
+
+            data = (
+                session.query(UserModel)
+                .filter_by(email=user_data["email"])
+                .one_or_none()
+            )
+
+            plan_contract = PlansContract(
+                user_id=int(data.id),
+                plan_id=1,
+                value_plan=0.0,
+                start_time_stamp=str(datetime.datetime.now()),
+                active=1,
+            )
+
+            session.add(plan_contract)
             session.commit()
 
             return User(
