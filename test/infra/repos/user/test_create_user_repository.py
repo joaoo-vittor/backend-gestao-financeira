@@ -1,8 +1,9 @@
+from faker import Faker
+import pytest
 from src.infra.repos.user import CreateUserRepository
 from src.infra.config import DBConnectionHandler
 from src.infra.entities import User
 from src.domain.usecases import CreateUserModel
-from faker import Faker
 
 faker = Faker()
 
@@ -47,3 +48,14 @@ def test_should_return_none_if_pass_none():
     response = sut.create_user(fake_user)
 
     assert response is None
+
+
+def test_should_raise_exeception_if_insert_two_some_emails():
+    sut = make_sut()
+    fake_user = make_create_user_model()
+
+    sut.create_user(fake_user)
+    with pytest.raises(Exception) as info_err:
+        sut.create_user(fake_user)
+
+    assert info_err.typename == "IntegrityError"
