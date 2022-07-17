@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: 'backend-python-flask'
-    command: 'gunicorn -w 5 -b 0.0.0.0:5000 "server:create_app()"'
+    command: 'gunicorn -w 2 -b 0.0.0.0:5000 "server:create_app()"'
     ports:
       - 5000:5000
     volumes: 
@@ -30,7 +30,7 @@ services:
   pgadmindb:
     image: dpage/pgadmin4
     environment:
-      - PGADMIN_DEFAULT_EMAIL=frodo
+      - PGADMIN_DEFAULT_EMAIL=frodo@bolseiro.com
       - PGADMIN_DEFAULT_PASSWORD=mellon
     ports:
       - 16543:80
