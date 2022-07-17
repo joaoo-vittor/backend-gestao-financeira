@@ -3,7 +3,7 @@ from sqlalchemy.sql import func
 from src.infra.config import Base
 
 
-class Plan(Base):
+class PlanModel(Base):
     """Plan Entity"""
 
     __tablename__ = "plan"

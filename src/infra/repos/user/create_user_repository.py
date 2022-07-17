@@ -2,7 +2,7 @@ import datetime
 from typing import Union
 from src.data.interfaces import CreateUserRespositoryInterface
 from src.domain.models.user import User
-from src.infra.entities import UserModel, PlansContract
+from src.infra.entities import UserModel, PlansContractModel
 from src.domain.usecases.user import CreateUserModel
 from src.infra.config import DBConnectionHandler
 
@@ -46,7 +46,7 @@ class CreateUserRepository(CreateUserRespositoryInterface):
                 .one_or_none()
             )
 
-            plan_contract = PlansContract(
+            plan_contract = PlansContractModel(
                 user_id=int(data.id),
                 plan_id=1,
                 value_plan=0.0,

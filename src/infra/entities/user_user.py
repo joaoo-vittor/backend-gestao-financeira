@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 from src.infra.config import Base
 
 
@@ -15,6 +16,10 @@ class UserModel(Base):
     password_hash = Column(String, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    plan_contract = relationship("PlansContractModel")
 
     def __repr__(self) -> str:
-        return f"Users(id={self.id}, name={self.name}, email={self.email})"
+        return f"Users(id={self.id},\
+            name={self.name},\
+            email={self.email},\
+            plan_contract={self.plan_contract})"
