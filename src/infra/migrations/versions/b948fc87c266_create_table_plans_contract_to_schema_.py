@@ -36,7 +36,7 @@ def upgrade() -> None:
             nullable=False,
         ),
         sa.Column("value_plan", sa.Float, nullable=False),
-        sa.column("start_time_stamp", sa.DateTime(timezone=True)),
+        sa.Column("start_time_stamp", sa.DateTime(timezone=True)),
         sa.Column("end_time_stamp", sa.DateTime(timezone=True)),
         sa.Column("active", sa.Boolean, default=True),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=func.now()),
