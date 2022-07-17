@@ -21,5 +21,5 @@ def upgrade() -> None:
 
 
 def downgrade() -> None:
-    op.execute("DROP SCHEMA IF NOT EXISTS users;")
-    op.execute("DROP SCHEMA IF NOT EXISTS expenses;")
+    op.execute("DROP SCHEMA IF EXISTS users;")
+    op.execute("DROP SCHEMA IF EXISTS expenses;")
