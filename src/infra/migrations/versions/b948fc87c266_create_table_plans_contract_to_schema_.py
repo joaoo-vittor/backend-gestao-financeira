@@ -24,15 +24,14 @@ def upgrade() -> None:
             "user_id",
             sa.Integer,
             sa.ForeignKey(
-                "users.users.id",
-                name="users_plans_contract",
+                "users.users.id", name="users_plans_contract", ondelete="CASCADE"
             ),
             nullable=False,
         ),
         sa.Column(
             "plan_id",
             sa.Integer,
-            sa.ForeignKey("users.plan.id", name="users"),
+            sa.ForeignKey("users.plan.id", name="users", ondelete="CASCADE"),
             nullable=False,
         ),
         sa.Column("value_plan", sa.Float, nullable=False),
