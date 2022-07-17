@@ -7,6 +7,7 @@ class User(Base):
     """User Entity"""
 
     __tablename__ = "users"
+    __table_args__ = {"schema": "users"}
 
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=True)

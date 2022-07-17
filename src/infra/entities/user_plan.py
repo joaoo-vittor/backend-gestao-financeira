@@ -7,6 +7,7 @@ class Plan(Base):
     """Plan Entity"""
 
     __tablename__ = "plan"
+    __table_args__ = {"schema": "users"}
 
     id = Column(Integer, primary_key=True)
     type = Column(String(50), nullable=False)

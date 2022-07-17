@@ -7,6 +7,7 @@ class Category(Base):
     """Category Entity"""
 
     __tablename__ = "category"
+    __table_args__ = {"schema": "expenses"}
 
     id = Column(Integer, primary_key=True)
     user_id = Column(

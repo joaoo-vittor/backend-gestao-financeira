@@ -7,6 +7,7 @@ class PlansContract(Base):
     """Plans Contract Entity"""
 
     __tablename__ = "plans_contract"
+    __table_args__ = {"schema": "users"}
 
     id = Column(Integer, primary_key=True)
     user_id = Column(

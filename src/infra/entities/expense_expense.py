@@ -7,6 +7,7 @@ class Expense(Base):
     """Expense Entity"""
 
     __tablename__ = "expenses"
+    __table_args__ = {"schema": "expenses"}
 
     id = Column(Integer, primary_key=True)
     user_id = Column(
@@ -44,6 +45,6 @@ class Expense(Base):
     def __repr__(self) -> str:
         return f"Expense(name={self.name},\
             value={self.value},\
-            status={self.value},\
+            status={self.status},\
             time_stamp={self.time_stamp},\
             voucher={self.voucher})"

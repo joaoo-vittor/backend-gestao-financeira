@@ -7,6 +7,7 @@ class PaymentMethod(Base):
     """PaymentMethod Entity"""
 
     __tablename__ = "payment_method"
+    __table_args__ = {"schema": "expenses"}
 
     id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
