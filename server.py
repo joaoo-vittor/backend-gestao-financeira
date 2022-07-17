@@ -1,4 +1,4 @@
-from src.app import app
+from src.main.configs import app
 
 
 def create_app():
