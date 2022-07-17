@@ -30,7 +30,7 @@ def upgrade() -> None:
         sa.Column(
             "category_id",
             sa.Integer,
-            sa.ForeignKey("expenses.category", name="category"),
+            sa.ForeignKey("expenses.category.id", name="category"),
             nullable=False,
         ),
         sa.Column(

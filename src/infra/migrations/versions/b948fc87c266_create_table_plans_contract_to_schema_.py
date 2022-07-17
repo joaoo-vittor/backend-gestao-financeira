@@ -25,7 +25,7 @@ def upgrade() -> None:
             sa.Integer,
             sa.ForeignKey(
                 "users.users.id",
-                name="users",
+                name="users_plans_contract",
             ),
             nullable=False,
         ),
