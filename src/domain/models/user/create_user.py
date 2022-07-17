@@ -2,7 +2,7 @@ from typing import TypedDict
 from typing_extensions import NotRequired
 
 
-class UserModel(TypedDict):
+class User(TypedDict):
     """User Model"""
 
     name: NotRequired[str]

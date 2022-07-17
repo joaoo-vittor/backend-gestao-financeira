@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import TypedDict, Union
 from typing_extensions import NotRequired
-from src.domain.models.user import UserModel
+from src.domain.models.user import User
 
 
 class CreateUserModel(TypedDict):
@@ -14,5 +14,5 @@ class CreateUserModel(TypedDict):
 
 class CreateUserInterface(ABC):
     @abstractmethod
-    def add(self, user: CreateUserModel) -> Union[UserModel, None]:
+    def add(self, user: CreateUserModel) -> Union[User, None]:
         raise Exception("Implementing method: add")

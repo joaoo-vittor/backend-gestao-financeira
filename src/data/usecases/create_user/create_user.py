@@ -1,6 +1,6 @@
 from typing import Union
 from src.domain.usecases.user import CreateUserInterface, CreateUserModel
-from src.domain.models.user import UserModel
+from src.domain.models.user import User
 from src.data.interfaces import (
     Encrypter,
     CreateUserRespositoryInterface as CreateUserRespository,
@@ -14,7 +14,7 @@ class CreateUserUseCase(CreateUserInterface):
         self.__encrypter = encrypter
         self.__create_user_repository = create_user_repository
 
-    def add(self, user: CreateUserModel) -> Union[UserModel, None]:
+    def add(self, user: CreateUserModel) -> Union[User, None]:
         """Add user
 
         Args:

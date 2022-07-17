@@ -3,7 +3,7 @@ from sqlalchemy.sql import func
 from src.infra.config import Base
 
 
-class User(Base):
+class UserModel(Base):
     """User Entity"""
 
     __tablename__ = "users"

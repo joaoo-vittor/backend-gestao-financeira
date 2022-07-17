@@ -1,5 +1,5 @@
 from typing import Any
-from src.domain.models.user import UserModel
+from src.domain.models.user import User
 
 
 class CreateUserUseCaseSpy:
@@ -10,6 +10,6 @@ class CreateUserUseCaseSpy:
 
     def add(self, user: Any) -> Any:
         self.user = user
-        return UserModel(
+        return User(
             name=user["name"] if "name" in user.keys() else None, email=user["email"]
         )
