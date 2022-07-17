@@ -1,7 +1,7 @@
 from typing import Union
 from src.data.interfaces import FindUserRespositoryInterface
 from src.domain.models.user import User
-from src.domain.usecases.user import FindUserModel
+from src.domain.usecases.user import LoginUserModel
 from src.infra.entities import UserModel
 from src.infra.config import DBConnectionHandler
 
@@ -10,11 +10,11 @@ class LoginUserRepository(FindUserRespositoryInterface):
     def __init__(self, connection_handler: DBConnectionHandler) -> None:
         self.__connection_handler = connection_handler
 
-    def find_user(self, user_data: FindUserModel) -> Union[User, None]:
+    def find_user(self, user_data: LoginUserModel) -> Union[User, None]:
         """Login user
 
         Args:
-            user_data (FindUserModel): model with data to find user
+            user_data (LoginUserModel): model with data to find user
 
         Returns:
             UserModel: model with data of the user to login
