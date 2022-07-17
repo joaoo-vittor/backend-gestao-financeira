@@ -17,4 +17,4 @@ class User(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     def __repr__(self) -> str:
-        return f"Users(name={self.name}, email={self.email})"
+        return f"Users(id={self.id}, name={self.name}, email={self.email})"
