@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import TypedDict, Union
-from src.domain.models.user import User
+from src.domain.models.auth import Auth
 
 
 class LoginUserModel(TypedDict):
@@ -12,5 +12,5 @@ class LoginUserModel(TypedDict):
 
 class LoginUserUseCase(ABC):
     @abstractmethod
-    def find_user(self, user: LoginUserModel) -> Union[User, None]:
-        ...
+    def get_user_info(self, user: LoginUserModel) -> Union[Auth, None]:
+        raise Exception("Implementing method: get_user_info")
