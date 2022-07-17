@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Any
 from faker import Faker
 from src.presentation.helpers import HttpRequest
 from src.presentation.interface import Validator
@@ -31,9 +32,26 @@ class SutTypes:
 
 def make_sut() -> SutTypes:
     repo = CreateUserRepositorySpy(None)
-    encripter = EncrypterSpy()
+    encrypter = EncrypterSpy()
     validator = ValidatorBadyCreateUserSpy()
-    usecase = CreateUserUseCaseSpy(repo, encripter)
+    usecase = CreateUserUseCaseSpy(repo, encrypter)
+    controller = CreateUserController(usecase, validator)
+    return SutTypes(sut=controller, validator=validator)
+
+
+class CreateUserUseCaseSpyWithException:
+    def __init__(self, repo, encrypter) -> None:
+        ...
+
+    def add(self, user: Any) -> Any:
+        raise Exception("")
+
+
+def make_sut_with_exception() -> SutTypes:
+    repo = CreateUserRepositorySpy(None)
+    encrypter = EncrypterSpy()
+    validator = ValidatorBadyCreateUserSpy()
+    usecase = CreateUserUseCaseSpyWithException(repo, encrypter)
     controller = CreateUserController(usecase, validator)
     return SutTypes(sut=controller, validator=validator)
 
@@ -62,6 +80,7 @@ def test_should_return_status_400_if_body_is_none():
     sut = make_sut().sut
     response = sut.handler(None)
     assert response.status_code == 400
+    assert response.body["errors"]["status_code"] == 400
 
 
 def test_should_return_status_422_if_body_is_invalid():
@@ -74,3 +93,13 @@ def test_should_return_status_422_if_body_is_invalid():
     response = sut.handler(http_request)
 
     assert response.status_code == 422
+    assert response.body["errors"]["status_code"] == 422
+
+
+def test_should_return_status_500_if_raise_exception():
+    sut = make_sut_with_exception().sut
+    http_request = make_http_request()
+    response = sut.handler(http_request)
+
+    assert response.status_code == 500
+    assert response.body["errors"]["status_code"] == 500
