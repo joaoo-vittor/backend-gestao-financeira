@@ -3,7 +3,7 @@ from faker import Faker
 from src.data.usecases.create_user import CreateUserUseCase
 from test.infra.repos.test import CreateUserRepositorySpy
 from src.data.interfaces import Encrypter
-from src.domain.usecases import CreateUserModel
+from src.domain.usecases.user import CreateUserModel
 
 faker = Faker()
 

@@ -1,10 +1,10 @@
 from typing import Type
 from src.main.interface import HandlerInterface
-from src.domain.usecases import CreateUserInterface as CreateUser
+from src.domain.usecases.user import CreateUserInterface as CreateUser
 from src.presentation.helpers.http import HttpRequest, HttpResponse
 from src.presentation.interface import Validator
 from src.presentation.errors import HttpErrors
-from src.domain.usecases import CreateUserModel
+from src.domain.usecases.user import CreateUserModel
 
 
 class CreateUserController(HandlerInterface):

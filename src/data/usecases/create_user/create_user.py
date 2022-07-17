@@ -1,6 +1,6 @@
 from typing import Union
-from src.domain.usecases import CreateUserInterface, CreateUserModel
-from src.domain.models import UserModel
+from src.domain.usecases.user import CreateUserInterface, CreateUserModel
+from src.domain.models.user import UserModel
 from src.data.interfaces import (
     Encrypter,
     CreateUserRespositoryInterface as CreateUserRespository,

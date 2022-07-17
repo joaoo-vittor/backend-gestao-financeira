@@ -1,5 +1,5 @@
 from typing import Any
-from src.domain.models import UserModel
+from src.domain.models.user import UserModel
 
 
 class CreateUserUseCaseSpy:

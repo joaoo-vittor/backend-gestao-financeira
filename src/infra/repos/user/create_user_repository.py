@@ -1,9 +1,9 @@
 import datetime
 from typing import Union
 from src.data.interfaces import CreateUserRespositoryInterface
-from src.domain.models import UserModel as User
+from src.domain.models.user import UserModel as User
 from src.infra.entities import User as UserModel, PlansContract
-from src.domain.usecases import CreateUserModel
+from src.domain.usecases.user import CreateUserModel
 from src.infra.config import DBConnectionHandler
 
 

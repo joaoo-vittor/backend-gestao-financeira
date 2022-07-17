@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Union
-from src.domain.usecases import CreateUserModel
-from src.domain.models import UserModel
+from src.domain.usecases.user import CreateUserModel
+from src.domain.models.user import UserModel
 
 
 class CreateUserRespositoryInterface(ABC):

@@ -2,7 +2,7 @@ from faker import Faker
 import pytest
 from src.infra.repos.user import CreateUserRepository
 from src.infra.config import DBConnectionHandler
-from src.domain.usecases import CreateUserModel
+from src.domain.usecases.user import CreateUserModel
 
 faker = Faker()
 
