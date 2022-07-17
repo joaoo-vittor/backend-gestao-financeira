@@ -42,3 +42,12 @@ def test_should_return_user_model_if_call_find_user_with_valid_values(drop_datab
     response = sut.find_user(user)
 
     assert response["email"] == email
+
+
+def test_should_return_none_if_find_user_not_find(drop_database):
+    sut = make_sut()
+    email = "any_email1@email.com"
+    user = FindUserModel(email=email, password="any_password")
+    response = sut.find_user(user)
+
+    assert response is None
