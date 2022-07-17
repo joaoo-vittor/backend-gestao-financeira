@@ -62,3 +62,15 @@ def test_should_return_status_400_if_body_is_none():
     sut = make_sut().sut
     response = sut.handler(None)
     assert response.status_code == 400
+
+
+def test_should_return_status_422_if_body_is_invalid():
+    sut_data = make_sut()
+    sut = sut_data.sut
+    validator = sut_data.validator
+    http_request = make_http_request()
+
+    validator.valid = False
+    response = sut.handler(http_request)
+
+    assert response.status_code == 422
