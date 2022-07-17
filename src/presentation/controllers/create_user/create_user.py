@@ -24,7 +24,7 @@ class CreateUserController(HandlerInterface):
 
         response = None
 
-        if http_request.body:
+        if http_request is not None and http_request.body:
             try:
                 body_is_valid = self.__validator.validate(http_request.body)
 
@@ -46,18 +46,19 @@ class CreateUserController(HandlerInterface):
 
                 http_error = HttpErrors.error_422()
                 return HttpResponse(
-                    status_code=http_error["status_code"],
-                    body=http_error["body"],
+                    status_code=http_error["errors"]["status_code"],
+                    body=http_error["errors"]["body"],
                 )
 
             except Exception:
                 http_error = HttpErrors.error_500()
                 return HttpResponse(
-                    status_code=http_error["status_code"],
-                    body=http_error["body"],
+                    status_code=http_error["errors"]["status_code"],
+                    body=http_error["errors"]["body"],
                 )
 
         http_error = HttpErrors.error_400()
         return HttpResponse(
-            status_code=http_error["status_code"], body=http_error["body"]
+            status_code=http_error["errors"]["status_code"],
+            body=http_error["errors"]["body"],
         )
