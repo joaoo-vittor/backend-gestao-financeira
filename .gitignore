@@ -3,6 +3,7 @@
 .vscode
 .mypy_cache
 .pytest_cache
+.database
 
 storage.db
 
