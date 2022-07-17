@@ -1,0 +1,1261 @@
+openapi: "3.0.1"
+
+info:
+  description: "Finance App"
+  version: "0.1.0"
+  title: "Finance app Backend"
+
+
+# externalDocs:
+#     description: Documentation on GitHub
+#     url: 
+
+
+servers:
+  
+  - url: http://0.0.0.0:5000/api/v1
+    description: Development local
+
+  - url: https://
+    description: Development server
+
+tags:
+- name: "User"
+  description: ""
+
+- name: "Expense"
+  description: ""
+
+
+paths:
+
+  /user/signup:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+      - "User"
+      summary: "Route to signup"
+      description: "Esta rota é responsável por realizar o signup do usuário"
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodySignup"
+
+      responses:
+        "204":
+          description: "successful operation"
+        
+            
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+          
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+
+  /user/change-password:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+      - "User"
+      summary: "Route to change password"
+      description: "Esta rota é responsavel por realizar o update da senha do usuário"
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodyChangePassword"
+
+      responses:
+        "204":
+          description: "successful operation"
+        
+        "422":
+          description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError422"
+            
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+          
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+  
+  /user/login:
+    post:
+      tags:
+      - "User"
+      summary: "Route to login"
+      description: "Esta rota é responsavel por realizar o login do usuário"
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodyLogin"
+
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnLoginResponse"
+         
+            
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        
+        "422":
+          description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError422"
+          
+          
+        "409":
+          description: "Indica que a solicitação atual conflitou com o recurso que está no servidor."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError409"
+          
+          
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+  
+  
+  /user/register:
+    post:
+      tags:
+      - "User"
+      summary: "Route to Register User"
+      description: "Esta rota é responsavel por realizar o registro do usuário"
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodyRegister"
+
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnRegisterResponse"
+         
+            
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        
+        "422":
+          description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError422"
+          
+          
+        "409":
+          description: "Indica que a solicitação atual conflitou com o recurso que está no servidor."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError409"
+          
+          
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+  
+  /user:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+      - "User"
+      summary: "Route to get user data"
+      description: "Esta rota é responsavel por obter dados do usuário"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnUserResponse"
+        
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+    
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - "User"
+      summary: "Route to update user data"
+      description: "Esta rota é responsavel por atulizar dados do usuário"
+      
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodyUserUpdate"
+
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnUserResponse"
+        
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+                
+        
+        "422":
+          description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError422"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+  
+  
+  /expenses:
+    get:
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: The number of items to skip before starting to collect the result set
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The numbers of items to return
+      tags:
+      - "Expense"
+      summary: "Route to get expenses"
+      description: "Esta rota é responsavel por obter os gastos de um usuário"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnExpansesResponse"
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+  
+  
+  /expense/payment-method:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+      - "Expense"
+      summary: "Route to get expense"
+      description: "Esta rota é responsavel por obter todos os metodos de pagamento"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnExpansePaymentMethodResponse"
+        
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+        
+  
+  /expense/{id}:
+    get:
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the expanse to get
+      tags:
+      - "Expense"
+      summary: "Route to get expense"
+      description: "Esta rota é responsavel por obter os gastos de um usuário"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnExpanseResponse"
+        
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+    
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the expanse to delete
+      tags:
+      - "Expense"
+      summary: "Route to delete expense"
+      description: "Esta rota é responsavel por criar um gasto"
+      
+      responses:
+        "204":
+          description: "successful operation"
+        
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        "422":
+          description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError422"
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+  
+  /expense:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+      - "Expense"
+      summary: "Route to create expense"
+      description: "Esta rota é responsavel por criar um gasto"
+      
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodyCreateExpanse"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnExpanseResponse"
+        
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+    
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - "Expense"
+      summary: "Route to update expense"
+      description: "Esta rota é responsavel por atualizar um gasto"
+      
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodyUpdateExpanse"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnExpanseResponse"
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        "422":
+          description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError422"
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+      
+  
+  # /expense/img:
+  #   post:
+  #     security:
+  #       - bearerAuth: []
+  #     tags:
+  #     - "Expense"
+  #     summary: "Route to create expense"
+  #     description: "Esta rota é responsavel por criar um gasto"
+      
+  #     requestBody:
+  #         content:
+  #           multipart/form-data:
+  #             schema:
+  #               type: object
+  #               required: [expanse_id, profileImage]
+  #               properties:
+  #                 expanse_id:
+  #                   type: "integer"
+  #                   example: 1
+  #                 profileImage:  
+  #                   type: string
+  #                   format: binary
+            
+  #     responses:
+  #       "204":
+  #         description: "successful operation"
+        
+  #       "400":
+  #         description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/returnError400"
+        
+  #       "401":
+  #         description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/returnError401"
+        
+  #       "403":
+  #         description: "Indica que o servidor entendeu o pedido, mas se recusa a autorizá-lo."
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/returnError403"
+        
+        
+  #       "422":
+  #         description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/returnError422"
+        
+        
+  #       "500":
+  #         description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/returnError500"
+  
+  /expense/category:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+      - "Expense"
+      summary: "Route to get categorys"
+      description: "Esta rota é responsavel por obter todas as categorias de um usuário"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnCategoriesResponse"
+        
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+        
+    
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+      - "Expense"
+      summary: "Route to create category"
+      description: "Esta rota é responsavel por criar categorias para um usuário"
+      
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodyCreateCategory"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnCategoryResponse"
+                  
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        "403":
+          description: "Indica que o servidor entendeu o pedido, mas se recusa a autorizá-lo."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError403"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+    
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - "Expense"
+      summary: "Route to update category"
+      description: "Esta rota é responsavel por atualizar categorias para um usuário"
+      
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bodyUpdateCategory"
+      
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnCategoryResponse"
+                  
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+    
+  /expense/category/{id}:
+    delete:
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the category to delete
+
+      tags:
+      - "Expense"
+      summary: "Route to create category"
+      description: "Esta rota é responsavel por criar categorias para um usuário"
+      
+      responses:
+        "204":
+          description: "successful operation"
+        
+        
+        "400":
+          description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError400"
+        
+        
+        "401":
+          description: "Indica que a solicitação não foi aplicada porque não possui credenciais de autenticação válidas para o recurso de destino."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError401"
+        
+        
+        "500":
+          description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/returnError500"
+                  
+    
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+  
+    bodyRegister:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+          example: "your_email@email.com"
+        password: 
+          type: "string"
+          example: "your_password"
+        name:
+          type: "string"
+          example: "your_name"
+    
+    bodyCreateCategory:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "alimentação"
+    
+    bodyUpdateCategory:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          example: 1
+        name:
+          type: "string"
+          example: "new_name"
+    
+    bodyUpdateExpanse:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "expanse name"
+        value: 
+          type: "number"
+          example: 145.25
+        status:
+          type: "string"
+          example: "pago"
+        time_stamp:
+          type: "string"
+          example: "2022-02-15"
+    
+    bodyCreateExpanse:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "expanse name"
+        value: 
+          type: "number"
+          example: 145.25
+        status:
+          type: "string"
+          example: "pago"
+        time_stamp:
+          type: "string"
+          example: "2022-02-15"
+    
+    bodyUserUpdate:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+          example: "your_email@email.com"
+        name:
+          type: "string"
+          example: "your_name"
+    
+    
+    returnExpansePaymentMethodResponse:
+      type: "object"
+      properties:
+        data:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+              example: "payment-mathod"
+            payment_mathod:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  id:
+                    type: "integer"
+                    example: 1
+                  name:
+                    type: "string"
+                    example: "debito"
+    
+    
+    returnRegisterResponse:
+      type: "object"
+      properties:
+        data:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+              example: "user"
+            user:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                  example: "joaozinho"
+                email:
+                  type: "string"
+                  example: "joaozinho@email.com"
+            
+    
+    
+    returnCategoryResponse:
+      type: "object"
+      properties:
+        data:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+              example: "category"
+            categories:
+              type: "object"
+              properties:
+                id:
+                  type: "integer"
+                  example: 1
+                name:
+                  type: "string"
+                  example: "alimentação"
+            relationships:
+              type: "object"
+              properties:
+                user_id:
+                  type: "integer"
+                  example: 1      
+    
+    returnExpanseResponse:
+      type: "object"
+      properties:
+        data:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+              example: "expanse"
+            expanse:
+              type: "object"
+              properties:
+                id:
+                  type: "integer"
+                  example: 1
+                name:
+                  type: "string"
+                  example: "any_expanse"
+                value: 
+                  type: "number"
+                  example: 15.5
+                status:
+                  type: "string"
+                  example: "pago"
+                time_stamp:
+                  type: "string"
+                  example: "2022-02-25"
+                voucher: 
+                  type: "string"
+                  example: "https://aws.bucket/img-jcn5165.png"
+            relationships:
+              type: "object"
+              properties:
+                user_id:
+                  type: "integer"
+                  example: 1
+    
+    returnExpansesResponse:
+      type: "object"
+      properties:
+        data:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+              example: "expanse"
+            expanses:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  id:
+                    type: "integer"
+                    example: 1
+                  name:
+                    type: "string"
+                    example: "any_expanse"
+                  value: 
+                    type: "number"
+                    example: 15.5
+                  status:
+                    type: "string"
+                    example: "pago"
+                  time_stamp:
+                    type: "string"
+                    example: "2022-02-25"
+                  voucher: 
+                    type: "string"
+                    example: "https://aws.bucket/img-jcn5165.png"
+            relationships:
+              type: "object"
+              properties:
+                user_id:
+                  type: "integer"
+                  example: 1
+    
+    returnCategoriesResponse:
+      type: "object"
+      properties:
+        data:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+              example: "category"
+            categories:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  id:
+                    type: "integer"
+                    example: 1
+                  name:
+                    type: "string"
+                    example: "alimentação"
+            relationships:
+              type: "object"
+              properties:
+                user_id:
+                  type: "integer"
+                  example: 1
+          
+    returnUserResponse:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+          example: "your_email@email.com"
+        name:
+          type: "string"
+          example: "your_name"
+        plan:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+              example: "freemium"
+            start_time_stamp:
+              type: "string"
+              example: "2022-04-25"
+
+    bodySignup:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+          example: "your_email@email.com"
+        password: 
+          type: "string"
+          example: "your_password"
+        
+    bodyChangePassword:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+          example: "your_email@email.com"
+        password: 
+          type: "string"
+          example: "your_old_password"
+        new_password:
+          type: "string"
+          example: "your_new_password"
+                    
+    bodyLogin:
+      type: "object"
+      properties:
+        email:
+          type: "string"
+          example: "your_email@email.com"
+        password: 
+          type: "string"
+          example: "your_password" 
+    
+    returnLoginResponse:
+      type: "object"
+      properties:
+        tokens:
+          type: "object"
+          properties:
+            authentication:
+              type: "string"
+              example: "Bearer token_string"
+            authorization:
+              type: "string"
+              example: "token_string"
+        
+  
+    returnError422:
+      type: "object"
+      properties:
+        errors:
+          type: "object"
+          properties:
+            status_code:
+              type: "integer"
+              example: 422
+            body:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unprocessable Entity"
+          
+
+    returnError400:
+      type: "object"
+      properties:
+        errors:
+          type: "object"
+          properties:
+            status_code:
+              type: "integer"
+              example: 400
+            body:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Bad Request"
+    
+    
+    returnError401:
+      type: "object"
+      properties:
+        errors:
+          type: "object"
+          properties:
+            status_code:
+              type: "integer"
+              example: 401
+            body:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Unauthorized"
+    
+    
+    returnError403:
+      type: "object"
+      properties:
+        errors:
+          type: "object"
+          properties:
+            status_code:
+              type: "integer"
+              example: 401
+            body:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Forbidden"              
+    
+    
+    returnError409:
+      type: "object"
+      properties:
+        errors:
+          type: "object"
+          properties:
+            status_code:
+              type: "integer"
+              example: 409
+            body:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Conflict"     
+      
+      
+    returnError500:
+      type: "object"
+      properties:
+        errors:
+          type: "object"
+          properties:
+            status_code:
+              type: "integer"
+              example: 500
+            body:
+              type: "object"
+              properties:
+                error:
+                  type: "string"
+                  example: "Internal Server Error"
+          
+          
