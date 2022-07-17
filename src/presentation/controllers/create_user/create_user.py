@@ -47,18 +47,18 @@ class CreateUserController(HandlerInterface):
                 http_error = HttpErrors.error_422()
                 return HttpResponse(
                     status_code=http_error["errors"]["status_code"],
-                    body=http_error["errors"]["body"],
+                    body=http_error,
                 )
 
             except Exception:
                 http_error = HttpErrors.error_500()
                 return HttpResponse(
                     status_code=http_error["errors"]["status_code"],
-                    body=http_error["errors"]["body"],
+                    body=http_error,
                 )
 
         http_error = HttpErrors.error_400()
         return HttpResponse(
             status_code=http_error["errors"]["status_code"],
-            body=http_error["errors"]["body"],
+            body=http_error,
         )
