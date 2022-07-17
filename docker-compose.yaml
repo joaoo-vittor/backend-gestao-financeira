@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: 'backend-python-flask'
-    command: 'gunicorn -w 2 -b 0.0.0.0:5000 "server:create_app()"'
+    command: 'gunicorn -w 2 -b 0.0.0.0:5000 "server:create_app()" --reload'
     ports:
       - 5000:5000
     volumes: 
