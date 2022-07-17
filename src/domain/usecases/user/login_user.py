@@ -10,7 +10,7 @@ class LoginUserModel(TypedDict):
     password: str
 
 
-class LoginUserUseCase(ABC):
+class LoginUserUseCaseInterface(ABC):
     @abstractmethod
     def get_user_info(self, user: LoginUserModel) -> Union[Auth, None]:
         raise Exception("Implementing method: get_user_info")

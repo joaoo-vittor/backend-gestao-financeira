@@ -1,12 +1,12 @@
 from typing import Union
-from src.data.interfaces import FindUserRespositoryInterface
+from src.data.interfaces import LoginUserRespositoryInterface
 from src.domain.models.user import UserLogin, PlanContract, Plan
 from src.domain.usecases.user import LoginUserModel
 from src.infra.entities import UserModel, PlansContractModel, PlanModel
 from src.infra.config import DBConnectionHandler
 
 
-class LoginUserRepository(FindUserRespositoryInterface):
+class LoginUserRepository(LoginUserRespositoryInterface):
     def __init__(self, connection_handler: DBConnectionHandler) -> None:
         self.__connection_handler = connection_handler
 
