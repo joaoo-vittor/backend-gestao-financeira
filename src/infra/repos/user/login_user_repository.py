@@ -53,6 +53,7 @@ class LoginUserRepository(LoginUserRespositoryInterface):
             ]
 
             return UserLogin(
+                id=user.id,
                 name=user.name,
                 email=user.email,
                 password_hash=user.password_hash,
