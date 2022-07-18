@@ -35,6 +35,9 @@ class LoginUserUseCase(LoginUserUseCaseInterface):
 
         response = self.__login_user_repository.find_user(user)
 
+        if response is None:
+            return None
+
         password_is_valid = self.__check_password.check(
             response["password_hash"], user["password"]
         )
