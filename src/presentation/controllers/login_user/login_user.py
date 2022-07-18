@@ -26,38 +26,47 @@ class LoginUserController(HandlerInterface):
 
         response = None
 
-        if http_request is not None and http_request.body:
-            try:
-                body_is_valid = self.__validator.validate(http_request.body)
+        if http_request is None or http_request.body is None:
+            http_error = HttpErrors.error_400()
+            return HttpResponse(
+                status_code=http_error["errors"]["status_code"],
+                body=http_error,
+            )
 
-                if body_is_valid:
-                    user = LoginUserModel(**http_request.body)
-                    response = self.__login_user_usecase.auth(user)
-                    return HttpResponse(
-                        status_code=200,
-                        body={
-                            "data": {
-                                "type": "auth",
-                                "tokens": response,
-                            }
-                        },
-                    )
+        try:
+            body_is_valid = self.__validator.validate(http_request.body)
 
+            if not body_is_valid:
                 http_error = HttpErrors.error_422()
                 return HttpResponse(
                     status_code=http_error["errors"]["status_code"],
                     body=http_error,
                 )
 
-            except Exception:
-                http_error = HttpErrors.error_500()
+            user = LoginUserModel(**http_request.body)
+            response = self.__login_user_usecase.auth(user)
+
+            if response is None:
+                http_error = HttpErrors.error_400()
                 return HttpResponse(
                     status_code=http_error["errors"]["status_code"],
                     body=http_error,
                 )
 
-        http_error = HttpErrors.error_400()
+        except Exception as e:
+            print(e)
+            http_error = HttpErrors.error_500()
+            return HttpResponse(
+                status_code=http_error["errors"]["status_code"],
+                body=http_error,
+            )
+
         return HttpResponse(
-            status_code=http_error["errors"]["status_code"],
-            body=http_error,
+            status_code=200,
+            body={
+                "data": {
+                    "type": "auth",
+                    "tokens": response,
+                }
+            },
         )
