@@ -1146,15 +1146,21 @@ components:
     returnLoginResponse:
       type: "object"
       properties:
-        tokens:
+        data:
           type: "object"
           properties:
-            authentication:
+            type: 
               type: "string"
-              example: "Bearer token_string"
-            authorization:
-              type: "string"
-              example: "token_string"
+              example: "auth"
+            tokens:
+              type: "object"
+              properties:
+                authentication:
+                  type: "string"
+                  example: "Bearer token_string"
+                authorization:
+                  type: "string"
+                  example: "token_string"
         
   
     returnError422:
