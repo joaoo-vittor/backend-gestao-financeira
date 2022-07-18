@@ -25,24 +25,27 @@ class LoginUserRepository(LoginUserRespositoryInterface):
 
         try:
             session = self.__connection_handler.get_session()
+
             user = (
                 session.query(UserModel)
-                .filter_by(email=user_data["email"])
                 .join(PlansContractModel, UserModel.id == PlansContractModel.user_id)
                 .join(PlanModel, PlanModel.id == PlansContractModel.plan_id)
+                .filter(UserModel.email == user_data["email"])
                 .one_or_none()
             )
 
             if user is None:
                 return None
 
+            user.plan_contract.sort(key=lambda x: x.end_time_stamp, reverse=True)
+
             user_plan_contract = [
                 PlanContract(
                     user_id=p.user_id,
                     plan_id=p.plan_id,
                     value_plan=p.value_plan,
-                    start_time_stamp=p.start_time_stamp,
-                    end_time_stamp=p.end_time_stamp,
+                    start_time_stamp=str(p.start_time_stamp),
+                    end_time_stamp=str(p.end_time_stamp),
                     active=p.active,
                 )
                 for p in user.plan_contract
@@ -57,8 +60,8 @@ class LoginUserRepository(LoginUserRespositoryInterface):
                 name=user.name,
                 email=user.email,
                 password_hash=user.password_hash,
-                plan_contract=user_plan_contract,
-                plan=plan,
+                plan_contract=user_plan_contract[0],
+                plan=plan[0],
             )
 
         except Exception:

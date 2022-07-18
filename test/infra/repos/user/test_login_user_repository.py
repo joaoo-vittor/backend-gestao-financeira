@@ -20,13 +20,18 @@ def make_sut() -> LoginUserRepository:
 def drop_database():
     connection_handler = DBConnectionHandler(CONNECTION_STRING_TEST)
     engine = connection_handler.get_engine()
+    engine.execute("DELETE FROM users.users")
     engine.execute(
         "INSERT INTO users.users(id, email, password_hash)\
         VALUES ('1', 'any_email@email.com', 'any_password')"
     )
     engine.execute(
-        "INSERT INTO users.plans_contract(id, user_id, plan_id, value_plan)\
-        VALUES ('1', '1', '1', '0.0')"
+        "INSERT INTO users.plans_contract(id, user_id, plan_id, value_plan, start_time_stamp, end_time_stamp)\
+        VALUES ('1', '1', '1', '0.0',current_date, current_date + INTERVAL '2 day')"
+    )
+    engine.execute(
+        "INSERT INTO users.plans_contract(id, user_id, plan_id, value_plan, start_time_stamp, end_time_stamp)\
+        VALUES ('2', '1', '1', '1.0',current_date, current_date + INTERVAL '4 day')"
     )
     yield
     engine.execute("DELETE FROM users.users")
@@ -46,8 +51,8 @@ def test_should_return_user_model_if_call_find_user_with_valid_values(drop_datab
     response = sut.find_user(user)
 
     assert response["email"] == email
-    assert response["plan"][0]["type"] == "Freemium"
-    assert response["plan"][0]["active"] is True
+    assert response["plan"]["type"] == "Freemium"
+    assert response["plan"]["active"] is True
 
 
 def test_should_return_none_if_find_user_not_find(drop_database):
