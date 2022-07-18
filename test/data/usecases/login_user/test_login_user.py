@@ -77,3 +77,14 @@ def test_should_return_none_if_check_password_is_invalid():
     response = sut.auth(user)
 
     assert response is None
+
+
+def test_should_return_tokens_if_call_with_correct_values():
+    sut_data = make_sut()
+    sut = sut_data.sut
+
+    user = LoginUserModel(email="any_email@email.com", password="any_password")
+    response = sut.auth(user)
+
+    assert "authentication" in response.keys()
+    assert "authorization" in response.keys()
