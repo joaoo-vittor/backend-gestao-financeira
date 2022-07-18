@@ -1,4 +1,5 @@
 from typing import Type
+from sqlalchemy.exc import IntegrityError
 from src.main.interface import HandlerInterface
 from src.domain.usecases.user import CreateUserInterface as CreateUser
 from src.presentation.helpers.http import HttpRequest, HttpResponse
@@ -50,7 +51,14 @@ class CreateUserController(HandlerInterface):
                     body=http_error,
                 )
 
-            except Exception:
+            except Exception as err:
+                if isinstance(err, IntegrityError):
+                    http_error = HttpErrors.error_409()
+                    return HttpResponse(
+                        status_code=http_error["errors"]["status_code"],
+                        body=http_error,
+                    )
+
                 http_error = HttpErrors.error_500()
                 return HttpResponse(
                     status_code=http_error["errors"]["status_code"],
