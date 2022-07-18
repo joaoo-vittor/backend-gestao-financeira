@@ -1,3 +1,5 @@
 from .create_user_repository import CreateUserRespositoryInterface
 from .encrypter import Encrypter
 from .login_user_repository import LoginUserRespositoryInterface
+from .check_password import CheckPassword
+from .generate_token import GenerateToken
