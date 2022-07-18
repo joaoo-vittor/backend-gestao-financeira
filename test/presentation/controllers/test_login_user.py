@@ -52,3 +52,19 @@ def test_should_return_status_400_if_http_request_is_invalid():
 
     assert http_response.status_code == 400
     assert "error" in http_response.body["errors"]["body"].keys()
+
+
+def test_should_return_status_422_if_body_is_invalid():
+    data_sut = make_sut()
+    sut = data_sut.sut
+    validator = data_sut.validator
+
+    http_request = HttpRequest(
+        body={"email": "any_email@email.com", "password": "any_password"}
+    )
+
+    validator.is_valid = False
+    http_response = sut.handler(http_request)
+
+    assert http_response.status_code == 422
+    assert "error" in http_response.body["errors"]["body"].keys()
