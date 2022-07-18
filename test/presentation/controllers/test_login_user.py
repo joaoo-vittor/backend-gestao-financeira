@@ -42,3 +42,13 @@ def test_should_return_status_200_if_http_request_is_valid():
     assert http_response.body["data"]["type"] == "auth"
     assert "authentication" in http_response.body["data"]["tokens"].keys()
     assert "authorization" in http_response.body["data"]["tokens"].keys()
+
+
+def test_should_return_status_400_if_http_request_is_invalid():
+    data_sut = make_sut()
+    sut = data_sut.sut
+
+    http_response = sut.handler(None)
+
+    assert http_response.status_code == 400
+    assert "error" in http_response.body["errors"]["body"].keys()
