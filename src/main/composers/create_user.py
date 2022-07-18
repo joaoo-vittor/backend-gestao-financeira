@@ -4,10 +4,7 @@ from src.data.usecases.create_user import CreateUserUseCase
 from src.infra.helpers.criptography import Encrypter
 from src.presentation.controllers.create_user import CreateUserController
 from src.presentation.helpers.validators import ValidatorBodyCreateUser
-
-CONNECTION_STRING = (
-    "postgresql+pg8000://postgres:mysecretpassword@127.0.0.1:5433/financeapp"
-)
+from src.settings import CONNECTION_STRING
 
 
 def create_user_compose() -> CreateUserController:
