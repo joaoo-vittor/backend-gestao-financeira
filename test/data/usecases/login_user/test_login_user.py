@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from src.data.usecases.login_user import LoginUserUseCase
+from src.domain.usecases.user import LoginUserModel
 from test.infra.repos.test import LoginUserRepositorySpy
 from src.data.interfaces import CheckPassword, GenerateToken
 
@@ -52,3 +53,15 @@ def test_should_return_none_if_call_auth_with_none():
     response = sut.auth(None)
 
     assert response is None
+
+
+def test_should_call_auth_with_correct_values():
+    sut_data = make_sut()
+    sut = sut_data.sut
+    repository = sut_data.repository
+    user = LoginUserModel(email="any_email@email.com", password="any_password")
+
+    sut.auth(user)
+
+    assert repository.user_data["email"] == user["email"]
+    assert repository.user_data["password"] == user["password"]
