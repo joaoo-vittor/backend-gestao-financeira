@@ -28,6 +28,19 @@ def make_sut() -> SutTypes:
     return SutTypes(sut=sut, validator=validator)
 
 
+class ValidateBodyLoginUserWithRaise(Validator):
+    def validate(self, data: dict) -> bool:
+        raise Exception("")
+
+
+def make_sut_with_exception() -> SutTypes:
+    repo = LoginUserRepositorySpy(None)
+    usecase = LoginUserUseCaseSpy(repo, None, None)
+    validator = ValidateBodyLoginUserWithRaise()
+    sut = LoginUserController(usecase, validator)
+    return SutTypes(sut=sut, validator=validator)
+
+
 def test_should_return_status_200_if_http_request_is_valid():
     data_sut = make_sut()
     sut = data_sut.sut
@@ -67,4 +80,17 @@ def test_should_return_status_422_if_body_is_invalid():
     http_response = sut.handler(http_request)
 
     assert http_response.status_code == 422
+    assert "error" in http_response.body["errors"]["body"].keys()
+
+
+def test_should_return_status_500_if_raise_exception():
+    sut = make_sut_with_exception().sut
+
+    http_request = HttpRequest(
+        body={"email": "any_email@email.com", "password": "any_password"}
+    )
+
+    http_response = sut.handler(http_request)
+
+    assert http_response.status_code == 500
     assert "error" in http_response.body["errors"]["body"].keys()
