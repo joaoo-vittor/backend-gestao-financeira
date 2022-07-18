@@ -51,6 +51,9 @@ class CreateUserRepository(CreateUserRespositoryInterface):
                 plan_id=1,
                 value_plan=0.0,
                 start_time_stamp=str(datetime.datetime.now()),
+                end_time_stamp=str(
+                    datetime.datetime.now() + datetime.timedelta(days=30)
+                ),
                 active=1,
             )
 
