@@ -1,1 +1,1 @@
-from .envs import CONNECTION_STRING
+from .envs import CONNECTION_STRING, JWT_SECRET_KEY
