@@ -12,5 +12,5 @@ class LoginUserModel(TypedDict):
 
 class LoginUserUseCaseInterface(ABC):
     @abstractmethod
-    def get_user_info(self, user: LoginUserModel) -> Union[Auth, None]:
+    def auth(self, user: LoginUserModel) -> Union[Auth, None]:
         raise Exception("Implementing method: get_user_info")
