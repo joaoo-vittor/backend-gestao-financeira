@@ -65,3 +65,15 @@ def test_should_call_auth_with_correct_values():
 
     assert repository.user_data["email"] == user["email"]
     assert repository.user_data["password"] == user["password"]
+
+
+def test_should_return_none_if_check_password_is_invalid():
+    sut_data = make_sut()
+    sut = sut_data.sut
+    check_password = sut_data.check_password
+    user = LoginUserModel(email="any_email@email.com", password="any_password")
+
+    check_password.is_valid = False
+    response = sut.auth(user)
+
+    assert response is None
