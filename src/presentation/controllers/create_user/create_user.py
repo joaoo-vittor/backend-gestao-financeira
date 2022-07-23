@@ -51,14 +51,15 @@ class CreateUserController(HandlerInterface):
                     body=http_error,
                 )
 
-            except Exception as err:
-                if isinstance(err, IntegrityError):
-                    http_error = HttpErrors.error_409()
-                    return HttpResponse(
-                        status_code=http_error["errors"]["status_code"],
-                        body=http_error,
-                    )
+            except IntegrityError:
 
+                http_error = HttpErrors.error_409()
+                return HttpResponse(
+                    status_code=http_error["errors"]["status_code"],
+                    body=http_error,
+                )
+
+            except Exception:
                 http_error = HttpErrors.error_500()
                 return HttpResponse(
                     status_code=http_error["errors"]["status_code"],
