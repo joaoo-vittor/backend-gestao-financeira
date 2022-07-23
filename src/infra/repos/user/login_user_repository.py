@@ -1,5 +1,5 @@
 from typing import Union
-from src.data.interfaces import LoginUserRespositoryInterface
+from src.data.interfaces.repository import LoginUserRespositoryInterface
 from src.domain.models.user import UserLogin, PlanContract, Plan
 from src.domain.usecases.user import LoginUserModel
 from src.infra.entities import UserModel, PlansContractModel, PlanModel

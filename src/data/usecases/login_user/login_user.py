@@ -2,8 +2,10 @@ from typing import Union
 from src.domain.models.auth import Auth
 from src.domain.usecases.user import LoginUserUseCaseInterface
 from src.domain.usecases.user import LoginUserModel
-from src.data.interfaces import (
+from src.data.interfaces.repository import (
     LoginUserRespositoryInterface as LoginUserRespository,
+)
+from src.data.interfaces import (
     CheckPassword,
     GenerateToken,
 )

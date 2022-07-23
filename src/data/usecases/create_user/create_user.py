@@ -1,9 +1,11 @@
 from typing import Union
 from src.domain.usecases.user import CreateUserInterface, CreateUserModel
 from src.domain.models.user import User
+from src.data.interfaces.repository import (
+    CreateUserRespositoryInterface as CreateUserRespository,
+)
 from src.data.interfaces import (
     Encrypter,
-    CreateUserRespositoryInterface as CreateUserRespository,
 )
 
 

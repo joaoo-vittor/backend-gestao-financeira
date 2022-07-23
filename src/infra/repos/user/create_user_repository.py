@@ -1,6 +1,6 @@
 import datetime
 from typing import Union
-from src.data.interfaces import CreateUserRespositoryInterface
+from src.data.interfaces.repository import CreateUserRespositoryInterface
 from src.domain.models.user import User
 from src.infra.entities import UserModel, PlansContractModel
 from src.domain.usecases.user import CreateUserModel
