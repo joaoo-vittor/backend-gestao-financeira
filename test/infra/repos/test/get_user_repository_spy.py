@@ -25,9 +25,8 @@ class GetUserRepositorySpy:
 
         self.user_data = user_data
 
-        user_id = faker.random_digit_not_null()
         plan_contract = PlanContract(
-            user_id=user_id,
+            user_id=user_data["id"],
             plan_id=faker.random_digit_not_null(),
             value_plan=faker.random_number(digits=3),
             start_time_stamp=faker.date(),
@@ -37,8 +36,7 @@ class GetUserRepositorySpy:
         )
 
         return UserData(
-            id=user_id,
+            id=user_data["id"],
             email=user_data["email"],
-            password_hash=user_data["password"],
             plan_contract=plan_contract,
         )
