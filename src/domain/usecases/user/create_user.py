@@ -12,7 +12,7 @@ class CreateUserModel(TypedDict):
     password: str
 
 
-class CreateUserInterface(ABC):
+class CreateUserUseCaseInterface(ABC):
     @abstractmethod
     def add(self, user: CreateUserModel) -> Union[User, None]:
         raise Exception("Implementing method: add")

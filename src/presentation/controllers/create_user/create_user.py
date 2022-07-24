@@ -1,7 +1,7 @@
 from typing import Type
 from sqlalchemy.exc import IntegrityError
 from src.main.interface import HandlerInterface
-from src.domain.usecases.user import CreateUserInterface as CreateUser
+from src.domain.usecases.user import CreateUserUseCaseInterface as CreateUser
 from src.presentation.helpers.http import HttpRequest, HttpResponse
 from src.presentation.interface import Validator
 from src.presentation.errors import HttpErrors

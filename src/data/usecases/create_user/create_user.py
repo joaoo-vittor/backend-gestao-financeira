@@ -1,5 +1,5 @@
 from typing import Union
-from src.domain.usecases.user import CreateUserInterface, CreateUserModel
+from src.domain.usecases.user import CreateUserUseCaseInterface, CreateUserModel
 from src.domain.models.user import User
 from src.data.interfaces.repository import (
     CreateUserRespositoryInterface as CreateUserRespository,
@@ -9,7 +9,7 @@ from src.data.interfaces import (
 )
 
 
-class CreateUserUseCase(CreateUserInterface):
+class CreateUserUseCase(CreateUserUseCaseInterface):
     def __init__(
         self, create_user_repository: CreateUserRespository, encrypter: Encrypter
     ) -> None:
