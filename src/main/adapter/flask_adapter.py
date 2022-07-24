@@ -5,14 +5,14 @@ from src.presentation.errors import HttpErrors
 
 
 def flask_adapter(request: Request, callback: Callable) -> HttpResponse:
-    """_summary_
+    """adapter to flask router
 
     Args:
-        request (Request): _description_
-        callback (Callable): _description_
+        request (Request): flask request
+        callback (Callable): handler controller
 
     Returns:
-        HttpResponse: _description_
+        HttpResponse: response data
     """
 
     body = None
@@ -20,7 +20,7 @@ def flask_adapter(request: Request, callback: Callable) -> HttpResponse:
     headers = None
 
     try:
-        body = request.get_json()
+        body = request.get_json(silent=True)
         query = request.args.to_dict()
         headers = {i[0]: i[1] for i in request.headers.to_wsgi_list()}
     except Exception:
