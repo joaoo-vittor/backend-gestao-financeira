@@ -30,3 +30,15 @@ def test_should_call_get_user_with_correct_values():
 
     assert repository.user_data["id"] == user["id"]
     assert repository.user_data["email"] == user["email"]
+
+
+def test_should_return_user_if_email_and_id_is_valid():
+    data_sut = make_sut()
+    sut = data_sut.sut
+
+    user = GetUserParams(id=faker.random_number(), email=faker.email())
+
+    response = sut.get_user(user)
+
+    assert response["id"] == user["id"]
+    assert response["email"] == user["email"]
