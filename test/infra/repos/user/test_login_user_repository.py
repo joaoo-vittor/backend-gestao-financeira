@@ -51,8 +51,8 @@ def test_should_return_user_model_if_call_find_user_with_valid_values(drop_datab
     response = sut.find_user(user)
 
     assert response["email"] == email
-    assert response["plan"]["type"] == "Freemium"
-    assert response["plan"]["active"] is True
+    assert response["plan_contract"]["plan"]["type"] == "Freemium"
+    assert response["plan_contract"]["plan"]["active"] is True
 
 
 def test_should_return_none_if_find_user_not_find(drop_database):

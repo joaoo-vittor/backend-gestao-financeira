@@ -14,7 +14,6 @@ class LoginUserRepositorySpy:
         self.user_data = user_data
 
         user_id = faker.random_digit_not_null()
-        plan = Plan(type="Freemium", active=True)
         plan_contract = PlanContract(
             user_id=user_id,
             plan_id=faker.random_digit_not_null(),
@@ -22,6 +21,7 @@ class LoginUserRepositorySpy:
             start_time_stamp=faker.date(),
             end_time_stamp=faker.date(),
             active=True,
+            plan=Plan(type="Freemium", active=True),
         )
 
         return UserData(
@@ -29,5 +29,4 @@ class LoginUserRepositorySpy:
             email=user_data["email"],
             password_hash=user_data["password"],
             plan_contract=plan_contract,
-            plan=plan,
         )

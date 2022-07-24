@@ -47,12 +47,9 @@ class LoginUserRepository(LoginUserRespositoryInterface):
                     start_time_stamp=str(p.start_time_stamp),
                     end_time_stamp=str(p.end_time_stamp),
                     active=p.active,
+                    plan=Plan(type=p.plan.type, active=p.plan.active),
                 )
                 for p in user.plan_contract
-            ]
-
-            plan = [
-                Plan(type=p.plan.type, active=p.plan.active) for p in user.plan_contract
             ]
 
             return UserData(
@@ -61,7 +58,6 @@ class LoginUserRepository(LoginUserRespositoryInterface):
                 email=user.email,
                 password_hash=user.password_hash,
                 plan_contract=user_plan_contract[0],
-                plan=plan[0],
             )
 
         except Exception:

@@ -50,8 +50,8 @@ class LoginUserUseCase(LoginUserUseCaseInterface):
         payload_authentication = {"id": response["id"], "email": response["email"]}
         payload_authorization = {
             "plan": {
-                "name": response["plan"]["type"],
-                "active": response["plan"]["active"],
+                "name": response["plan_contract"]["plan"]["type"],
+                "active": response["plan_contract"]["plan"]["active"],
             },
             "plan_contract": {
                 "start_date": response["plan_contract"]["start_time_stamp"],

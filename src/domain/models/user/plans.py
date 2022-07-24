@@ -1,6 +1,13 @@
 from typing import TypedDict
 
 
+class Plan(TypedDict):
+    """Plan"""
+
+    type: str
+    active: bool
+
+
 class PlanContract(TypedDict):
     """Plan Contract"""
 
@@ -10,3 +17,4 @@ class PlanContract(TypedDict):
     start_time_stamp: str
     end_time_stamp: str
     active: bool
+    plan: Plan

@@ -1,6 +1,6 @@
 from typing import TypedDict
 from typing_extensions import NotRequired
-from src.domain.models.user import PlanContract, Plan
+from src.domain.models.user import PlanContract
 
 
 class UserData(TypedDict):
@@ -11,4 +11,3 @@ class UserData(TypedDict):
     email: str
     password_hash: NotRequired[str]
     plan_contract: PlanContract
-    plan: Plan
