@@ -54,3 +54,13 @@ def test_should_return_user_if_authentication_token_in_header_is_valid():
     assert response.status_code == 200
     assert response.body["data"]["user"]["id"] == decrypt.payload["id"]
     assert response.body["data"]["user"]["email"] == decrypt.payload["email"]
+
+
+def test_should_return_status_400_if_http_request_is_invalid():
+    data_sut = make_sut()
+    sut = data_sut.sut
+
+    http_response = sut.handler(None)
+
+    assert http_response.status_code == 400
+    assert "error" in http_response.body["errors"]["body"].keys()
