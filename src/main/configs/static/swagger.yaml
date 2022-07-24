@@ -1094,21 +1094,52 @@ components:
     returnUserResponse:
       type: "object"
       properties:
-        email:
-          type: "string"
-          example: "your_email@email.com"
-        name:
-          type: "string"
-          example: "your_name"
-        plan:
+        data:
           type: "object"
           properties:
             type:
               type: "string"
-              example: "freemium"
-            start_time_stamp:
-              type: "string"
-              example: "2022-04-25"
+              example: "user"
+            user:
+              type: "object"
+              properties:
+                id: 
+                  type: "integer"
+                  example: 1
+                name: 
+                  type: "string"
+                  example: "your_name"
+                email:
+                  type: "string"
+                  example: "your_email@email.com"
+                plan_contract:
+                  type: "object"
+                  properties:
+                    plan_id:
+                      type: "integer"
+                      example: 1
+                    user_id:
+                      type: "integer"
+                      example: 1
+                    start_time_stamp:
+                      type: "string"
+                      example: "2022-04-25"
+                    end_time_stamp:
+                      type: "string"
+                      example: "2022-05-25"
+                    value_plan:
+                      type: "number"
+                      example: 9.9
+                    active:
+                      type: "boolean"
+                    plan:
+                      type: "object"
+                      properties:
+                        active:
+                          type: "boolean"
+                        type:
+                          type: "string"
+                          example: "freemium"
 
     bodySignup:
       type: "object"
