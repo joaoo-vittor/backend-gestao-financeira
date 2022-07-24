@@ -68,3 +68,12 @@ def test_should_return_none_if_email_or_id_is_invalid():
     response = sut.find_user_by(user_params)
 
     assert response is None
+
+
+def test_should_return_none_if_is_none():
+    sut = make_sut()
+
+    user_params = None
+    response = sut.find_user_by(user_params)
+
+    assert response is None
