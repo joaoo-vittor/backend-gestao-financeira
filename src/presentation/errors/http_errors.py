@@ -10,6 +10,18 @@ class HttpErrors:
         }
 
     @staticmethod
+    def error_401():
+        """HTTP 401"""
+
+        return {"errors": {"status_code": 401, "body": {"error": "Unauthorized"}}}
+
+    @staticmethod
+    def error_403():
+        """HTTP 403"""
+
+        return {"errors": {"status_code": 403, "body": {"error": "Forbidden"}}}
+
+    @staticmethod
     def error_400():
         """HTTP 400"""
 
