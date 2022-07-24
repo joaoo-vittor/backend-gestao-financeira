@@ -42,3 +42,14 @@ def test_should_return_user_if_email_and_id_is_valid():
 
     assert response["id"] == user["id"]
     assert response["email"] == user["email"]
+
+
+def test_should_return_none_if_call_get_none_with_none():
+    data_sut = make_sut()
+    sut = data_sut.sut
+
+    user = None
+
+    response = sut.get_user(user)
+
+    assert response is None
