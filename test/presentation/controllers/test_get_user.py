@@ -49,11 +49,11 @@ def test_should_return_user_if_authentication_token_in_header_is_valid():
     header = {"Authentication": "any_token"}
     http_request = HttpRequest(header=header)
 
-    response = sut.handler(http_request)
+    http_response = sut.handler(http_request)
 
-    assert response.status_code == 200
-    assert response.body["data"]["user"]["id"] == decrypt.payload["id"]
-    assert response.body["data"]["user"]["email"] == decrypt.payload["email"]
+    assert http_response.status_code == 200
+    assert http_response.body["data"]["user"]["id"] == decrypt.payload["id"]
+    assert http_response.body["data"]["user"]["email"] == decrypt.payload["email"]
 
 
 def test_should_return_status_400_if_http_request_is_invalid():
@@ -63,4 +63,19 @@ def test_should_return_status_400_if_http_request_is_invalid():
     http_response = sut.handler(None)
 
     assert http_response.status_code == 400
+    assert "error" in http_response.body["errors"]["body"].keys()
+
+
+def test_should_return_status_401_if_authentication_token_in_header_is_invalid():
+    data_sut = make_sut()
+    sut = data_sut.sut
+    validator = data_sut.validator
+
+    header = {"Authentication": "any_token"}
+    http_request = HttpRequest(header=header)
+
+    validator.is_valid = False
+    http_response = sut.handler(http_request)
+
+    assert http_response.status_code == 401
     assert "error" in http_response.body["errors"]["body"].keys()
