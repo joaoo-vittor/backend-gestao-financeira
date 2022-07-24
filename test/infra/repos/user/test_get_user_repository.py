@@ -59,3 +59,12 @@ def test_should_return_user_data_if_email_and_id_is_correct(drop_database):
 
     assert response["id"] == user_data["id"]
     assert response["email"] == user_data["email"]
+
+
+def test_should_return_none_if_email_or_id_is_invalid():
+    sut = make_sut()
+
+    user_params = GetUserParams(id=150, email="any_email@email.com")
+    response = sut.find_user_by(user_params)
+
+    assert response is None
