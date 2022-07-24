@@ -1,6 +1,6 @@
 from typing import Union
 from src.data.interfaces.repository import LoginUserRespositoryInterface
-from src.domain.models.user import UserLogin, PlanContract, Plan
+from src.domain.models.user import UserData, PlanContract, Plan
 from src.domain.usecases.user import LoginUserModel
 from src.infra.entities import UserModel, PlansContractModel, PlanModel
 from src.infra.config import DBConnectionHandler
@@ -10,7 +10,7 @@ class LoginUserRepository(LoginUserRespositoryInterface):
     def __init__(self, connection_handler: DBConnectionHandler) -> None:
         self.__connection_handler = connection_handler
 
-    def find_user(self, user_data: LoginUserModel) -> Union[UserLogin, None]:
+    def find_user(self, user_data: LoginUserModel) -> Union[UserData, None]:
         """Login user
 
         Args:
@@ -55,7 +55,7 @@ class LoginUserRepository(LoginUserRespositoryInterface):
                 Plan(type=p.plan.type, active=p.plan.active) for p in user.plan_contract
             ]
 
-            return UserLogin(
+            return UserData(
                 id=user.id,
                 name=user.name,
                 email=user.email,

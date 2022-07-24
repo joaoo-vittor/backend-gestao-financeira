@@ -1,5 +1,5 @@
 from typing import Any, Union
-from src.domain.models.user import UserLogin, Plan, PlanContract
+from src.domain.models.user import UserData, Plan, PlanContract
 from faker import Faker
 
 faker = Faker()
@@ -10,7 +10,7 @@ class LoginUserRepositorySpy:
         self.__connection_handler = connection_handler
         self.user_data = None
 
-    def find_user(self, user_data: Any) -> Union[UserLogin, None]:
+    def find_user(self, user_data: Any) -> Union[UserData, None]:
         self.user_data = user_data
 
         user_id = faker.random_digit_not_null()
@@ -24,7 +24,7 @@ class LoginUserRepositorySpy:
             active=True,
         )
 
-        return UserLogin(
+        return UserData(
             id=user_id,
             email=user_data["email"],
             password_hash=user_data["password"],

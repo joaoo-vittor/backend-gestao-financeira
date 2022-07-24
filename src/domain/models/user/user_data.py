@@ -3,7 +3,7 @@ from typing_extensions import NotRequired
 from src.domain.models.user import PlanContract, Plan
 
 
-class UserLogin(TypedDict):
+class UserData(TypedDict):
     """User Model"""
 
     id: int
