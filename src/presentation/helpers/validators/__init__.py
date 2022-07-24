@@ -1,2 +1,3 @@
 from .validator_create_user import ValidatorBodyCreateUser
 from .validator_login_user import ValidatorBodyLoginUser
+from .validator_get_user import ValidatorPayloadHeaderToken
