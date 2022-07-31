@@ -162,3 +162,17 @@ gunicorn -w 5 -b 0.0.0.0:5000 "server:create_app()"
 docker-compose up
 ```
 
+## Registro de alterações
+
+
+### 0.1.0
+
+- Registro de usuário
+
+### 0.2.0
+
+- Login de usuário
+
+### 0.3.0
+
+- Obter dados de usuário
