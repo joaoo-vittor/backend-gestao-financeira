@@ -1,0 +1,19 @@
+@startuml Level1
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Diagrama de contexto para o aplicativo: Se controla - Gestão financeira pessoal
+
+
+SHOW_PERSON_OUTLINE()
+
+
+Person(cliente, "Cliente do App: Se controla", "Um cliente do aplicativo: Se controla")
+System(app, "Aplicativo: Se controla",  "Permite que o cliente visialize informações de gastos. Lançar, editar e excluir gastos. Criar categorias e escolher formas de pagamento.")
+Rel(cliente, app, "Vê gastos. lançar, edita e deleta gastos. criar, edita e deleta categorias. escolhe forma de pagamento.")
+System_Ext(email, "Sistema de envio de email", "Sisitema de email da MailGun para envio de emails para os clientes do aplicativo. Em caso de recuperação de senha e registro de usuário.")
+Rel(app, email, "Envia email usando")
+Rel(email, cliente, "Envia email para")
+
+
+@enduml

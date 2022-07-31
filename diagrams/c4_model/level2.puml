@@ -1,0 +1,38 @@
+@startuml Level2
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define ICONURL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.4.0
+!include ICONURL/devicons/postgresql.puml
+!include DEVICONS/python.puml
+!include DEVICONS/react.puml
+
+AddRelTag("async", $lineStyle = DashedLine())
+
+title Diagrama de contêineres para o aplicativo: Se controla - Gestão financeira pessoal
+
+LAYOUT_LEFT_RIGHT()
+SHOW_PERSON_OUTLINE()
+
+
+Person(cliente, "Cliente do App: Se controla", "Um cliente do aplicativo: Se controla")
+
+System_Boundary(sys_app, "Sistema do aplicativo: Se controla") {
+
+  Container(app_mobile, "Aplicativo móvel do Se controla", "React Native", "Fornece um conjunto de ilimitado de funcionalidades para aos clientes na modalidade Premium, e um subconjunto de funcionalidades limitadas para os cliente da modalidade Fremium", $sprite="react")
+  Container(backend, "Backend do Se controla", "Python e Flask", "Fornece funcionalidades do aplicativo via API JSON / HTTPS.", $sprite="python")
+  ContainerDb(database, "Banco de Dados Relacional", "Postgresql", "Armazena informações do cliente, informações de gastos, categorias, formas de pagamento, credenciais e tipos de plano do cliente.", $sprite="postgresql")
+
+  Rel(app_mobile, backend, "Faz chamadas de API para", "JSON/HTTPS")
+  Rel(backend, database, "Lê e escreve em", "Postgre Protocol")
+
+}
+
+System_Ext(email, "Sistema de envio de email", "Sisitema de email da MailGun para envio de emails para os clientes do aplicativo. Em caso de recuperação de senha e registro de usuário.")
+
+Rel(cliente, app_mobile, "Vê gastos. lançar, edita e deleta gastos. criar, edita e deleta categorias. escolhe forma de pagamento.")
+Rel(backend, email, "Envia email usando", "JSON/HTTPS")
+Rel(email, cliente, "Envia email para", $sprite = "&envelope-closed")
+
+@enduml
