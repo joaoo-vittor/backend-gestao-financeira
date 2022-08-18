@@ -103,7 +103,7 @@
 > Clone o repositório
 
 ```
-git clone git@github.com:organize-dot-me/backend.git
+git clone git@github.com:joaoo-vittor/backend-gestao-financeira.git
 ```
 
 ### 2° Passo
