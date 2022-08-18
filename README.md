@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Backend: Se controla - Aplicativo de gestão financeira</h1>
+  <h1>Backend: Software de gestão financeira</h1>
 </div>
 
 ----
